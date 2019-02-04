@@ -5,7 +5,7 @@ const yauzl = require("yauzl");
 
 
 function unzip(filePath, options = Object(null)) {
-
+    return 1;
 }
 
 
