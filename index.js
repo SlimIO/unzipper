@@ -16,17 +16,39 @@ let UNZIP_DIR = process.cwd();
 let LOG = false;
 let LOG_FILE = false;
 
+
+/**
+ * @version 1.0.0
+ *
+ * @private
+ * @function getZipFile
+ * @param {String} zipFilePath Zip file path
+ *
+ * @returns {Promise<ZipFile>}
+ */
 function getZipFile(zipFilePath) {
     return new Promise((resolve, reject) => {
         yauzl.open(zipFilePath, { lazyEntries: true }, (err, zipfile) => {
             if (err) {
-                reject(err);
+                return reject(err);
             }
-            resolve(zipfile);
+
+            return resolve(zipfile);
         });
     });
 }
 
+/**
+ * @version 1.0.0
+ *
+ * @private
+ * @function readStream
+ * @param {ZipFile} zipfile ZipFile Object
+ * @param {Entry} entry Entry Object from ZipFile
+ *
+ * @throws {Error}
+ * @returns {void}
+ */
 function readStream(zipfile, entry) {
     zipfile.openReadStream(entry, (err, readStream) => {
         if (err) {
@@ -49,6 +71,17 @@ function readStream(zipfile, entry) {
     });
 }
 
+/**
+ * @version 1.0.0
+ *
+ * @private
+ * @function readStream
+ * @param {ReadableStream} readStream ReadableStream Object
+ * @param {String} fileName Filename for WritableStream
+ *
+ * @throws {Error}
+ * @returns {void}
+ */
 function writeStream(readStream, fileName) {
     const write = createWriteStream(join(UNZIP_DIR, fileName));
     write.on("error", (err) => {
@@ -62,6 +95,17 @@ function writeStream(readStream, fileName) {
     readStream.pipe(write);
 }
 
+/**
+ * @version 1.0.0
+ *
+ * @async
+ * @private
+ * @function createDir
+ * @param {ZipFile} zipfile ZipFile Object
+ * @param {Entry} entry Entry Object from ZipFile
+ *
+ * @returns {Promise<void>}
+ */
 async function createDir(zipfile, entry) {
     if (LOG) {
         console.log(`Directory: ${entry.fileName}`);
@@ -70,6 +114,15 @@ async function createDir(zipfile, entry) {
     zipfile.readEntry();
 }
 
+/**
+ * @version 1.0.0
+ *
+ * @private
+ * @function readAllEntries
+ * @param {ZipFile} zipfile ZipFile Object
+ *
+ * @returns {Promise<void>}
+ */
 function readAllEntries(zipfile) {
     return new Promise((resolve) => {
         zipfile.readEntry();
@@ -87,6 +140,17 @@ function readAllEntries(zipfile) {
     });
 }
 
+/**
+ * @version 1.0.0
+ *
+ * @async
+ * @public
+ * @function unzip
+ * @param {String} filePath String path .zip
+ * @param {Object} options Options object
+ *
+ * @returns {Promise<void>}
+ */
 async function unzip(filePath, options = Object.create(null)) {
     if (!is.nullOrUndefined(options.dir) && !is.string(options.dir)) {
         throw new TypeError("options.dir param must be a type <string>");
