@@ -10,3 +10,8 @@ $ npm i @slimio/unzipper
 # or
 $ yarn add @slimio/unzipper
 ```
+
+
+## TODO
+- test
+- Complete readme
