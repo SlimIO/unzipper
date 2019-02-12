@@ -149,6 +149,7 @@ function readAllEntries(zipfile) {
  * @param {String} filePath String path .zip
  * @param {Object} options Options object
  *
+ * @throws {Error|TypeError}
  * @returns {Promise<void>}
  */
 async function unzip(filePath, options = Object.create(null)) {
