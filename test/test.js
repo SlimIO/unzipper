@@ -35,38 +35,74 @@ async function testUnzip(assert, basicDir) {
 
 
 japaTest.group("All throw error", (group) => {
-    japaTest.failing("options.dir param must be a type <string>", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: 10 });
-        assert.isFalse(error, "options.dir param must be a type <string>");
+    japaTest("wrong zip path", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip("foo");
+        }
+        catch ({ code }) {
+            assert.equal(code, "ENOENT");
+        }
     });
 
-    japaTest.failing("options.dir param must be a type <string>", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: 10 });
-        assert.isFalse(error, "options.dir param must be a type <string>");
+    japaTest("options.dir param must be a type <string>", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip(ZIP_PATH, { dir: 10 });
+        }
+        catch ({ message }) {
+            assert.equal(message, "options.dir param must be a type <string>");
+        }
     });
 
-    japaTest.failing("options.dir param is not an absolute path", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: "foo" });
-        assert.isFalse(error, "options.dir param is not an absolute path");
+    japaTest("options.dir param is not an absolute path", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip(ZIP_PATH, { dir: "foo" });
+        }
+        catch ({ message }) {
+            assert.equal(message, "options.dir param is not an absolute path");
+        }
     });
 
-    japaTest.failing("options.log param must be a type <boolean>", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: __dirname, log: 10 });
-        assert.isFalse(error, "options.log param must be a type <boolean>");
+    japaTest("options.log param must be a type <boolean> | number", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip(ZIP_PATH, { dir: __dirname, log: 10 });
+        }
+        catch ({ message }) {
+            assert.equal(message, "options.log param must be a type <boolean>");
+        }
     });
 
-    japaTest.failing("options.log param must be a type <boolean>", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: __dirname, log: "10" });
-        assert.isFalse(error, "options.log param must be a type <boolean>");
+    japaTest("options.log param must be a type <boolean> | string", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip(ZIP_PATH, { dir: __dirname, log: "10" });
+        }
+        catch ({ message }) {
+            assert.equal(message, "options.log param must be a type <boolean>");
+        }
     });
 
-    japaTest.failing("options.logFile param must be a type <boolean>", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: __dirname, logFile: 10 });
-        assert.isFalse(error, "options.logFile param must be a type <boolean>");
+    japaTest("options.logFile param must be a type <boolean> | number", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip(ZIP_PATH, { dir: __dirname, logFile: 10 });
+        }
+        catch ({ message }) {
+            assert.equal(message, "options.logFile param must be a type <boolean>");
+        }
     });
-    japaTest.failing("options.logFile param must be a type <boolean>", async(assert) => {
-        const error = await unzip(ZIP_PATH, { dir: __dirname, logFile: "10" });
-        assert.isFalse(error, "options.logFile param must be a type <boolean>");
+
+    japaTest("options.logFile param must be a type <boolean> | string", async(assert) => {
+        assert.plan(1);
+        try {
+            await unzip(ZIP_PATH, { dir: __dirname, logFile: "10" });
+        }
+        catch ({ message }) {
+            assert.equal(message, "options.logFile param must be a type <boolean>");
+        }
     });
 });
 
@@ -91,6 +127,13 @@ japaTest.group("All Unzip", (group) => {
         await testUnzip(assert, basicDir);
     });
 
+    japaTest("Basic unzip with log", async(assert) => {
+        const basicDir = join(__dirname, ZIP_FILE_NAME);
+
+        await unzip(ZIP_PATH, { dir: __dirname, log: true });
+        await testUnzip(assert, basicDir);
+    });
+
     japaTest("Unzip with added directory", async(assert) => {
         const addedDir = `${__dirname}/dir`;
         const basicDir = join(addedDir, ZIP_FILE_NAME);
@@ -98,4 +141,5 @@ japaTest.group("All Unzip", (group) => {
         await unzip(ZIP_PATH, { dir: addedDir });
         await testUnzip(assert, basicDir);
     });
+
 });
