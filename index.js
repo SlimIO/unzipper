@@ -134,9 +134,7 @@ function readAllEntries(zipfile) {
                 readStream(zipfile, entry);
             }
         });
-        zipfile.on("end", () => {
-            resolve();
-        });
+        zipfile.on("end", resolve);
     });
 }
 
@@ -174,6 +172,5 @@ async function unzip(filePath, options = Object.create(null)) {
     const zipFile = await getZipFile(filePath);
     await readAllEntries(zipFile);
 }
-
 
 module.exports = unzip;
