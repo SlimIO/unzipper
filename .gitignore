@@ -59,4 +59,4 @@ typings/
 
 docs
 benchmark/*
-!benchmark/index.js
+!/benchmark/index.js
