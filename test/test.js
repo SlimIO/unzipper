@@ -84,26 +84,6 @@ japaTest.group("All throw error", (group) => {
             assert.equal(message, "options.log param must be a type <boolean>");
         }
     });
-
-    japaTest("options.logFile param must be a type <boolean> | number", async(assert) => {
-        assert.plan(1);
-        try {
-            await unzip(ZIP_PATH, { dir: __dirname, logFile: 10 });
-        }
-        catch ({ message }) {
-            assert.equal(message, "options.logFile param must be a type <boolean>");
-        }
-    });
-
-    japaTest("options.logFile param must be a type <boolean> | string", async(assert) => {
-        assert.plan(1);
-        try {
-            await unzip(ZIP_PATH, { dir: __dirname, logFile: "10" });
-        }
-        catch ({ message }) {
-            assert.equal(message, "options.logFile param must be a type <boolean>");
-        }
-    });
 });
 
 japaTest.group("All Unzip", (group) => {
