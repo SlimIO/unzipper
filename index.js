@@ -7,12 +7,16 @@ const is = require("@slimio/is");
 const yauzl = require("yauzl");
 
 /**
+ * @namespace Unzipper
+ */
+
+/**
  * @version 1.0.0
  *
  * @private
  * @function getZipFile
- * @param {String} zipFilePath Zip file path
- *
+ * @memberof Unzipper#
+ * @param {!String} zipFilePath Zip file path
  * @returns {Promise<ZipFile>}
  */
 function getZipFile(zipFilePath) {
@@ -33,11 +37,15 @@ function getZipFile(zipFilePath) {
  * @async
  * @public
  * @function unzip
- * @param {String} filePath String path .zip
- * @param {Object} options Options object
- *
- * @throws {Error|TypeError}
+ * @memberof Unzipper#
+ * @param {!String} filePath String path .zip
+ * @param {Object} [options] Options object
+ * @param {String} options.dir Output directory
+ * @param {Boolean} options.log Log information to the stdout
  * @returns {Promise<void>}
+ *
+ * @throws {TypeError}
+ * @throws {Error}
  */
 async function unzip(filePath, options = Object.create(null)) {
     const dirDef = !is.undefined(options.dir);
