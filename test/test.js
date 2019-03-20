@@ -5,10 +5,9 @@ const { access } = require("fs").promises;
 // Require Third-Party Dependencies!
 const japaTest = require("japa");
 const del = require("del");
-const is = require("@slimio/is");
 
 // Require Internal Dependencies
-const unzip = require("../index.js");
+const unzip = require("../");
 
 const ZIP_FILE_NAME = "testUnzip";
 const ZIP_PATH = join(__dirname, `${ZIP_FILE_NAME}.zip`);

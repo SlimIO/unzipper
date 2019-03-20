@@ -1,13 +1,13 @@
 /// <reference types="@types/yauzl" />
 
 declare namespace Unzipper {
-    export interface unzipOptions {
+    export interface ConstructorOptions {
         dir: string;
         log: boolean;
         logFile: boolean;
     }
-    export function unzip(filePath: string, options?: unzipOptions): void;
 }
+declare function Unzipper(filePath: string, options?: Unzipper.ConstructorOptions): void;
 
 export as namespace Unzipper;
 export = Unzipper;
