@@ -98,25 +98,6 @@ function writeStream(readStream, fileName) {
 /**
  * @version 1.0.0
  *
- * @async
- * @private
- * @function createDir
- * @param {ZipFile} zipfile ZipFile Object
- * @param {Entry} entry Entry Object from ZipFile
- *
- * @returns {Promise<void>}
- */
-async function createDir(zipfile, entry) {
-    if (LOG) {
-        console.log(`Directory: ${entry.fileName}`);
-    }
-    await mkdir(join(UNZIP_DIR, entry.fileName), { recursive: true });
-    zipfile.readEntry();
-}
-
-/**
- * @version 1.0.0
- *
  * @private
  * @function readAllEntries
  * @param {ZipFile} zipfile ZipFile Object
@@ -124,11 +105,20 @@ async function createDir(zipfile, entry) {
  * @returns {Promise<void>}
  */
 function readAllEntries(zipfile) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         zipfile.readEntry();
         zipfile.on("entry", async(entry) => {
             if (/\/$/.test(entry.fileName)) {
-                await createDir(zipfile, entry);
+                try {
+                    if (LOG) {
+                        console.log(`Directory: ${entry.fileName}`);
+                    }
+                    await mkdir(join(UNZIP_DIR, entry.fileName), { recursive: true });
+                }
+                catch (err) {
+                    reject(err);
+                }
+                zipfile.readEntry();
             }
             else {
                 readStream(zipfile, entry);
