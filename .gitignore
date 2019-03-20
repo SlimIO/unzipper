@@ -58,3 +58,5 @@ typings/
 .env
 
 docs
+benchmark/*
+!benchmark/index.js
