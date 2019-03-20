@@ -1,10 +1,7 @@
 // Require Node.JS Dependencies
 const {
     createWriteStream,
-    promises: {
-        writeFile,
-        mkdir
-    }
+    promises: { mkdir }
 } = require("fs");
 const { isAbsolute, join } = require("path");
 
@@ -42,63 +39,6 @@ function getZipFile(zipFilePath) {
  * @version 1.0.0
  *
  * @private
- * @function readStream
- * @param {ZipFile} zipfile ZipFile Object
- * @param {Entry} entry Entry Object from ZipFile
- *
- * @throws {Error}
- * @returns {void}
- */
-function readStream(zipfile, entry) {
-    zipfile.openReadStream(entry, (err, readStream) => {
-        if (err) {
-            throw err;
-        }
-
-        readStream.on("error", (err) => {
-            throw err;
-        });
-
-        if (LOG) {
-            console.log(`File: ${entry.fileName}`);
-        }
-
-        readStream.on("end", () => {
-            zipfile.readEntry();
-        });
-
-        writeStream(readStream, entry.fileName);
-    });
-}
-
-/**
- * @version 1.0.0
- *
- * @private
- * @function readStream
- * @param {ReadableStream} readStream ReadableStream Object
- * @param {String} fileName Filename for WritableStream
- *
- * @throws {Error}
- * @returns {void}
- */
-function writeStream(readStream, fileName) {
-    const write = createWriteStream(join(UNZIP_DIR, fileName));
-    write.on("error", (err) => {
-        throw err;
-    });
-
-    if (LOG_FILE) {
-        readStream.pipe(process.stdout);
-    }
-
-    readStream.pipe(write);
-}
-
-/**
- * @version 1.0.0
- *
- * @private
  * @function readAllEntries
  * @param {ZipFile} zipfile ZipFile Object
  *
@@ -107,6 +47,7 @@ function writeStream(readStream, fileName) {
 function readAllEntries(zipfile) {
     return new Promise((resolve, reject) => {
         zipfile.readEntry();
+        zipfile.once("end", resolve);
         zipfile.on("entry", async(entry) => {
             if (/\/$/.test(entry.fileName)) {
                 try {
@@ -114,17 +55,35 @@ function readAllEntries(zipfile) {
                         console.log(`Directory: ${entry.fileName}`);
                     }
                     await mkdir(join(UNZIP_DIR, entry.fileName), { recursive: true });
+                    zipfile.readEntry();
                 }
                 catch (err) {
                     reject(err);
                 }
-                zipfile.readEntry();
+
+                return void 0;
             }
-            else {
-                readStream(zipfile, entry);
-            }
+
+            zipfile.openReadStream(entry, (err, readStream) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                readStream.once("error", reject);
+                readStream.on("end", () => zipfile.readEntry());
+                if (LOG) {
+                    console.log(`File: ${entry.fileName}`);
+                }
+
+                const wS = createWriteStream(join(UNZIP_DIR, entry.fileName));
+                wS.once("error", reject);
+                readStream.pipe(wS);
+
+                return void 0;
+            });
+
+            return void 0;
         });
-        zipfile.on("end", resolve);
     });
 }
 
