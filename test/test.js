@@ -121,5 +121,4 @@ japaTest.group("All Unzip", (group) => {
         await unzip(ZIP_PATH, { dir: addedDir });
         await testUnzip(assert, basicDir);
     });
-
 });
