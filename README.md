@@ -1,6 +1,11 @@
-# @slimio/unzipper
+# Unzipper
 ![Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/SlimIO/unzipper/master/package.json?token=Aeue0P3eryCYRikk9tHZScyXOpqtMvFIks5ca-XwwA%3D%3D&query=$.version&label=Version)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/SlimIO/Winmem/blob/master/LICENSE)
+
+Modern unzipper with support of `async/await`. This module use [yauzl](https://github.com/thejoshwolfe/yauzl) under the hood and has been designed to replace [extract-zip](https://github.com/maxogden/extract-zip#readme).
+
+## Requirements
+- Node.js v10 or higher
 
 ## Getting Started
 
@@ -14,29 +19,31 @@ $ yarn add @slimio/unzipper
 
 ## API
 
-### unzip(filePath: string, options?: unzipOptions): void;
+### Unzipper(filePath: string, options?: Unzipper.ConstructorOptions): void
 
+Extract a zip file
 ```js
+const { join } = require("path");
 const unzip = require("@slimio/unzipper");
 
 const filePath = "your/zip/file.zip";
 await unzip(filePath);
 // or
-await unzip(filePath, { dir: "/to/specific/dir" });
+await unzip(filePath, { dir: join(__dirname, "yourDirectory") });
 ```
 
-### Options
+> ⚠️ dir must be an absolute path.
+
+Available options are described by the following TypeScript interface:
 ```ts
-interface unzipOptions {
-    dir: string;
-    log: boolean;
-    logFile: boolean;
+interface ConstructorOptions {
+    dir?: string;
+    log?: boolean;
 }
 ```
 
-- `dir` : unzip directory target. Default : `process.cwd();`
-- `log` : Log directories and files path
-- `logFile` : Log all files content
+- `dir` : unzip directory target. (Default: `process.cwd()`)
+- `log` : Log directories and files path (Default: `false`).
 
 ## License
 MIT

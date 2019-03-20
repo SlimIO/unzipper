@@ -2,9 +2,8 @@
 
 declare namespace Unzipper {
     export interface ConstructorOptions {
-        dir: string;
-        log: boolean;
-        logFile: boolean;
+        dir?: string;
+        log?: boolean;
     }
 }
 declare function Unzipper(filePath: string, options?: Unzipper.ConstructorOptions): void;
