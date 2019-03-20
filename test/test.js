@@ -1,9 +1,6 @@
 // Require Node.JS Dependencies
 const { join } = require("path");
-const {
-    rmdir,
-    access
-} = require("fs").promises;
+const { access } = require("fs").promises;
 
 // Require Third-Party Dependencies!
 const japaTest = require("japa");
