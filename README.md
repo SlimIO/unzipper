@@ -17,11 +17,7 @@ $ npm i @slimio/unzipper
 $ yarn add @slimio/unzipper
 ```
 
-## API
-
-### Unzipper(filePath: string, options?: Unzipper.ConstructorOptions): void
-
-Extract a zip file
+## Usage example
 ```js
 const { join } = require("path");
 const unzip = require("@slimio/unzipper");
@@ -31,6 +27,12 @@ await unzip(filePath);
 // or
 await unzip(filePath, { dir: join(__dirname, "yourDirectory") });
 ```
+
+## API
+
+### Unzipper(filePath: string, options?: Unzipper.ConstructorOptions): void
+
+Extract a zip file
 
 > ⚠️ dir must be an absolute path.
 
