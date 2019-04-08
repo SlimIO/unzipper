@@ -57,6 +57,7 @@ typings/
 # dotenv environment variables file
 .env
 
-docs
+docs/
+jsdoc/
 benchmark/*
 !/benchmark/index.js
