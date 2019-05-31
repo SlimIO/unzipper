@@ -1,6 +1,10 @@
 # Unzipper
 ![Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/SlimIO/unzipper/master/package.json?token=Aeue0P3eryCYRikk9tHZScyXOpqtMvFIks5ca-XwwA%3D%3D&query=$.version&label=Version)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/SlimIO/Winmem/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/SlimIO/unzipper/commit-activity)
+![MIT](https://img.shields.io/github/license/mashape/apistatus.svg)
+![dep](https://img.shields.io/david/SlimIO/unzipper.svg)
+![size](https://img.shields.io/bundlephobia/min/@slimio/unzipper.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/SlimIO/unzipper/badge.svg?targetFile=package.json)](https://snyk.io/test/github/SlimIO/unzipper?targetFile=package.json)
 
 Modern unzipper with support of `async/await`. This module use [yauzl](https://github.com/thejoshwolfe/yauzl) under the hood and has been designed to replace [extract-zip](https://github.com/maxogden/extract-zip#readme).
 
