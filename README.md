@@ -52,5 +52,12 @@ interface ConstructorOptions {
 - `dir` : unzip directory target. (Default: `process.cwd()`)
 - `log` : Log directories and files path (Default: `false`).
 
+## Dependencies
+
+|Name|Refactoring|Security Risk|Usage|
+|---|---|---|---|
+|[@slimio/is](https://github.com/SlimIO/is#readme)|Minor|Low|Type Checker|
+|[yauzl](https://github.com/thejoshwolfe/yauzl)|⚠️Major|High|Unzipper for Node.js|
+
 ## License
 MIT
