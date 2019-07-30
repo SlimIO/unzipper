@@ -1,3 +1,5 @@
+"use strict";
+
 // Require Node.js Dependencies
 const { createWriteStream, promises: { mkdir } } = require("fs");
 const { isAbsolute, join } = require("path");
@@ -16,7 +18,7 @@ const yauzl = require("yauzl");
  * @private
  * @function getZipFile
  * @memberof Unzipper#
- * @param {!String} zipFilePath Zip file path
+ * @param {!string} zipFilePath Zip file path
  * @returns {Promise<ZipFile>}
  */
 function getZipFile(zipFilePath) {
@@ -38,10 +40,10 @@ function getZipFile(zipFilePath) {
  * @public
  * @function unzip
  * @memberof Unzipper#
- * @param {!String} filePath String path .zip
- * @param {Object} [options] Options object
- * @param {String} options.dir Output directory
- * @param {Boolean} options.log Log information to the stdout
+ * @param {!string} filePath String path .zip
+ * @param {object} [options] Options object
+ * @param {string} options.dir Output directory
+ * @param {boolean} options.log Log information to the stdout
  * @returns {Promise<void>}
  *
  * @throws {TypeError}

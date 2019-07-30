@@ -1,3 +1,5 @@
+"use strict";
+
 // Require Node.JS Dependencies
 const { join } = require("path");
 const { access } = require("fs").promises;
@@ -12,6 +14,16 @@ const unzip = require("../");
 const ZIP_FILE_NAME = "testUnzip";
 const ZIP_PATH = join(__dirname, `${ZIP_FILE_NAME}.zip`);
 
+/**
+ * @version 1.0.0
+ *
+ * @async
+ * @function testUnzip test
+ * @param {!object} assert assert
+ * @param {object} basicDir basicdir
+ * @returns {Promise<void>}
+ *
+ */
 async function testUnzip(assert, basicDir) {
     try {
         await Promise.all([

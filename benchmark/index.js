@@ -1,3 +1,5 @@
+"use strict";
+
 // Require Node.js Dependencies
 const { join } = require("path");
 
@@ -9,6 +11,13 @@ const { downloadNodeFile, constants: { File } } = require("@slimio/nodejs-downlo
 // Require Internal Dependencies
 const unzip = require("../");
 
+/**
+ * @version 1.0.0
+ *
+ * @async
+ * @function main
+ * @returns {Promise<void>}
+ */
 async function main() {
     const fName = await downloadNodeFile(File.WinBinary64, { dest: __dirname });
 
