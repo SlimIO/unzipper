@@ -16,10 +16,11 @@
         "url": "git+https://github.com/SlimIO/unzipper.git"
     },
     "keywords": [
-        "SlimIO",
-        "monitoring",
         "yauzl",
-        "unzipper"
+        "unzipper",
+        "zip",
+        "unzip",
+        "extract"
     ],
     "files": [
         "index.js",
