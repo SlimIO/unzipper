@@ -61,3 +61,6 @@ docs/
 jsdoc/
 benchmark/*
 !/benchmark/index.js
+test/dir
+test/testUnzip
+
