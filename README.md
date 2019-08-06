@@ -10,7 +10,7 @@
 Modern unzipper with support of `async/await`. This module use [yauzl](https://github.com/thejoshwolfe/yauzl) under the hood and has been designed to replace [extract-zip](https://github.com/maxogden/extract-zip#readme).
 
 ## Requirements
-- Node.js v10 or higher
+- [Node.js](https://nodejs.org/en/) v10 or higher
 
 ## Getting Started
 
