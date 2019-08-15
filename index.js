@@ -2,10 +2,9 @@
 
 // Require Node.js Dependencies
 const { createWriteStream, promises: { mkdir } } = require("fs");
-const { isAbsolute, join } = require("path");
+const { join } = require("path");
 
 // Require Third-Party Dependencies!
-const is = require("@slimio/is");
 const yauzl = require("yauzl");
 
 /**
@@ -50,15 +49,15 @@ function getZipFile(zipFilePath) {
  * @throws {Error}
  */
 async function unzip(filePath, options = Object.create(null)) {
-    const dirDef = !is.undefined(options.dir);
-    if (dirDef && !is.string(options.dir)) {
+    const { log = false, dir: unzipDir = process.cwd() } = options;
+
+    if (typeof unzipDir !== "undefined" && typeof unzipDir !== "string") {
         throw new TypeError("options.dir param must be a type <string>");
     }
-    if (!is.nullOrUndefined(options.log) && !is.boolean(options.log)) {
+    if (typeof log !== "undefined" && typeof log !== "boolean") {
         throw new TypeError("options.log param must be a type <boolean>");
     }
 
-    const { log = false, dir: unzipDir = process.cwd() } = options;
     const zipFile = await getZipFile(filePath);
     await new Promise((resolve, reject) => {
         zipFile.readEntry();
