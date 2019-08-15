@@ -54,9 +54,6 @@ async function unzip(filePath, options = Object.create(null)) {
     if (dirDef && !is.string(options.dir)) {
         throw new TypeError("options.dir param must be a type <string>");
     }
-    if (dirDef && !isAbsolute(options.dir)) {
-        throw new Error("options.dir param is not an absolute path");
-    }
     if (!is.nullOrUndefined(options.log) && !is.boolean(options.log)) {
         throw new TypeError("options.log param must be a type <boolean>");
     }

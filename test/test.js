@@ -63,16 +63,6 @@ japaTest.group("All throw error", (group) => {
         }
     });
 
-    japaTest("options.dir param is not an absolute path", async(assert) => {
-        assert.plan(1);
-        try {
-            await unzip(ZIP_PATH, { dir: "foo" });
-        }
-        catch ({ message }) {
-            assert.equal(message, "options.dir param is not an absolute path");
-        }
-    });
-
     japaTest("options.log param must be a type <boolean> | number", async(assert) => {
         assert.plan(1);
         try {
