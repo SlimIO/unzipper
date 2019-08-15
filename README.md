@@ -56,7 +56,6 @@ interface ConstructorOptions {
 
 |Name|Refactoring|Security Risk|Usage|
 |---|---|---|---|
-|[@slimio/is](https://github.com/SlimIO/is#readme)|Minor|Low|Type Checker|
 |[yauzl](https://github.com/thejoshwolfe/yauzl)|⚠️Major|High|Unzipper for Node.js|
 
 ## License
