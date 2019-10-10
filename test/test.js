@@ -86,15 +86,15 @@ japaTest.group("All throw error", (group) => {
 
 japaTest.group("All Unzip", (group) => {
     group.afterEach(async() => {
-        // await new Promise((resolve) => setTimeout(resolve, 100));
-        const exeption = [
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        const exceptions = [
             join(`!${__dirname}`),
             join(`!${__dirname}`, "test.js"),
             join(`!${__dirname}`, "testUnzip.zip")
         ];
-        const deletedPaths = await del([
+        await del([
             join(__dirname, "**"),
-            ...exeption
+            ...exceptions
         ]);
     });
 
