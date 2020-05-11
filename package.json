@@ -46,7 +46,7 @@
         "@types/yauzl": "^2.9.1",
         "cross-env": "^6.0.3",
         "del": "^5.1.0",
-        "eslint": "^6.6.0",
+        "eslint": "^7.0.0",
         "extract-zip": "^1.6.7",
         "husky": "^3.0.9",
         "japa": "^3.0.1",
