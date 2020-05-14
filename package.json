@@ -47,7 +47,7 @@
         "cross-env": "^7.0.2",
         "del": "^5.1.0",
         "eslint": "^7.0.0",
-        "extract-zip": "^1.6.7",
+        "extract-zip": "^2.0.0",
         "husky": "^4.2.5",
         "japa": "^3.0.1",
         "jsdoc": "^3.6.4",
