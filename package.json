@@ -42,7 +42,7 @@
         "@slimio/eslint-config": "^4.1.0",
         "@slimio/is": "^1.5.1",
         "@slimio/nodejs-downloader": "^0.4.0",
-        "@slimio/psp": "^0.11.1",
+        "@slimio/psp": "^0.12.3",
         "@types/yauzl": "^2.9.1",
         "codecov": "^3.7.0",
         "cross-env": "^7.0.2",
